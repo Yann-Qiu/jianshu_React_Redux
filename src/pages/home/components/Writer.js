@@ -19,7 +19,7 @@ class Writer extends Component{
 					writerList.map((item)=>{
 						return(
 							<WriterItem key={item.get("id")}>
-								<img className="pic" src={item.get("imgUrl")}/>
+								<img className="pic" src={item.get("imgUrl")} alt="img"/>
 								<div className="name">{item.get("name")}</div>
 								<div className="desc">写了{item.get("word")}字 · {item.get("like")}喜欢</div>
 							</WriterItem>

@@ -1,0 +1,1 @@
+export const CHANGE_CONTENT = "home/change_content";

@@ -4,9 +4,10 @@ import List from './components/List.js';
 import Recommande from './components/Recommande.js';
 import Writer from './components/Writer.js';
 import Topic from './components/Topic.js';
+import { connect } from 'react-redux';
+import { actionCreator } from './store';
 
 class Home extends Component{
-	
 	render(){
 		return (
 			<HomeWrapper>
@@ -23,6 +24,22 @@ class Home extends Component{
 		)
 	}
 
+	componentDidMount(){
+		this.props.getData();
+	}
 }
 
-export default Home;
+const mapStateToProps = (state)=>{
+	return {	
+	}
+}
+
+const mapDispatchToProps = (dispatch)=>{
+	return {
+		getData(){
+			dispatch(actionCreator.getData())
+		}
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

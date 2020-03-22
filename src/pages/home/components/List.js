@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component } from 'react';
 import { ListItem,ListInfo,ListDesc } from '../style.js';
 import { connect } from 'react-redux';
 
@@ -14,7 +14,8 @@ class List extends Component{
 							<ListItem key={item.get("id")}>
 								<img 
 									className="pic"
-									src={item.get("imgUrl")} 
+									src={item.get("imgUrl")}
+									alt="img" 
 								/>
 								<ListInfo>
 									<h3 className="title">{item.get("title")} </h3>

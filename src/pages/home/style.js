@@ -67,7 +67,7 @@ export const AtricleInfoItem = styled.div`
 `
 
 export const TopicWrapper = styled.div`
-	padding: 20px 0 10px 0;
+	padding: 0px 0 10px 0;
 	overflow: hidden;
 	margin-left: -18px;
 	border-bottom: 1px solid #dcdcdc;
