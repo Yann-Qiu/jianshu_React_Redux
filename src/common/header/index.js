@@ -113,9 +113,9 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
 	return {
 		handlerInputFocus(list){
-		if(list.size === 0)
-			dispatch(actionCreators.getList());
-		dispatch(actionCreators.handlerInputFocus());
+			if(list.size === 0)
+				dispatch(actionCreators.getList());
+			dispatch(actionCreators.handlerInputFocus());
 		},
 		handlerInputBlur(){
 			dispatch(actionCreators.handlerInputBlur());

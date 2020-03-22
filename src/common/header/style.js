@@ -12,7 +12,7 @@ export const HeaderWrapper = styled.div`
 export const Logo = styled.a.attrs({href:'/'})`
 	position: absolute;
 	top : 0;
-	left : 0;
+	left : 30px;
 	display: block;
 	width: 15%;
 	height : 56px;
