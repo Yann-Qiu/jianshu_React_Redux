@@ -12,6 +12,7 @@ import {
 } from './style.js';
 import { connect } from 'react-redux';
 import  { actionCreators } from './store';
+import { Link } from 'react-router-dom';
 
 class Header extends Component{
 	constructor(props){
@@ -24,7 +25,9 @@ class Header extends Component{
 		return (
 			<Fragment>
 				<HeaderWrapper>
-					<Logo />
+					<Link to='/'>
+						<Logo />
+					</Link>
 					<Nav>
 						<NavItem className="left active"><span className="iconfont">&#xe62f;</span> 首页</NavItem>
 						<NavItem className="left"><span className="iconfont">&#xe600;</span> 下载APP</NavItem>

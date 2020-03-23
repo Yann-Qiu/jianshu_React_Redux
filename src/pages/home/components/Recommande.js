@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { CodeApp } from '../style.js';
 
-class Recommande extends Component{
+class Recommande extends PureComponent{
 	
 	render(){
 		return (

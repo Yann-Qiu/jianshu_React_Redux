@@ -225,3 +225,28 @@ export const WriterItem = styled.div`
 	}
 `
 
+export const LoadMore = styled.div`
+	width: 100%;
+	height: 40px;
+	line-height:40px;
+	background:#a5a5a5;
+	border-radius: 20px;
+	color: #fff;
+    margin: 30px auto 60px;
+    text-align: center;
+    font-size: 15px;
+    cursor:pointer;
+`
+
+export const BackToTop = styled.div`
+	position: fixed;
+	right:40px;
+	bottom: 50px;
+	width: 50px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	border: 1px solid #ccc;
+	cursor: pointer;
+`
+

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { HomeWrapper,HomeLeft,HomeRight,HeadImg } from './style.js';
+import React, { PureComponent } from 'react';
+import { HomeWrapper,HomeLeft,HomeRight,HeadImg,BackToTop } from './style.js';
 import List from './components/List.js';
 import Recommande from './components/Recommande.js';
 import Writer from './components/Writer.js';
@@ -7,12 +7,12 @@ import Topic from './components/Topic.js';
 import { connect } from 'react-redux';
 import { actionCreator } from './store';
 
-class Home extends Component{
+class Home extends PureComponent{
 	render(){
 		return (
 			<HomeWrapper>
 				<HomeLeft>
-					<HeadImg src="https://cdn2.jianshu.io/assets/web/misc-pic3-a3e7f05fee99976afbb936eb6d3c288a.png" />
+					
 					<Topic />
 					<List />
 				</HomeLeft>
@@ -20,17 +20,32 @@ class Home extends Component{
 					<Recommande />
 					<Writer />
 				</HomeRight>
+				{this.props.showScroll ? <BackToTop onClick={this.backToTop.bind(this)}>Top</BackToTop> : null}
 			</HomeWrapper>
 		)
 	}
 
+	backToTop(){
+		window.scrollTo(0,0);
+	}
+
+	bindEvents(){
+		window.addEventListener("scroll", this.props.changeShowScroll);
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener("scroll", this.props.changeShowScroll);
+	}
+
 	componentDidMount(){
 		this.props.getData();
+		this.bindEvents();
 	}
 }
 
 const mapStateToProps = (state)=>{
-	return {	
+	return {
+		showScroll: state.getIn(["home","showScroll"]),
 	}
 }
 
@@ -38,6 +53,12 @@ const mapDispatchToProps = (dispatch)=>{
 	return {
 		getData(){
 			dispatch(actionCreator.getData())
+		},
+		changeShowScroll(){
+			if(document.documentElement.scrollTop > 50)
+				dispatch(actionCreator.changeShowScrollTrue())
+			else
+				dispatch(actionCreator.changeShowScrollFalse())
 		}
 	}
 }

@@ -15,8 +15,8 @@ class App extends Component {
       	<Provider store = {store}>
 	        <GlobalStyle />
 	        <IconFont />
-	        <Header />
           <BrowserRouter>
+            <Header />
             <Route path='/'  exact component={Home}></Route>
             <Route path='/detail' exact component={Detail}></Route>
           </BrowserRouter>
@@ -25,8 +25,5 @@ class App extends Component {
       );
   }
 }
-
-//test
-//test2
 
 export default App;
