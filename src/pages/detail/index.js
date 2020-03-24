@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Page,Button,DetailWrapper,DetailTitle,DetailText,DetailWriter,DetailSide } from './style.js';
 import { connect } from 'react-redux';
 import { actionCreator } from "./store";
 
-class Detail extends Component{
+class Detail extends PureComponent{
 	
 	render(){
+		//console.log(this.props.match.params.id);
 		const { detailList } = this.props;
 		return (
 			<Page>
@@ -64,7 +65,7 @@ class Detail extends Component{
 	}
 
 	componentDidMount(){
-		this.props.getDetail();
+		this.props.getDetail(this.props.match.params.id);
 	}
 }
 
@@ -76,8 +77,8 @@ const mapStateToProps = (state)=>{
 	
 const mapDispatchToProps = (dispatch)=>{
 	return{
-		getDetail(){
-			dispatch(actionCreator.getDetail());
+		getDetail(id){
+			dispatch(actionCreator.getDetail(id));
 		},
 	}
 }

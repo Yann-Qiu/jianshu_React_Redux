@@ -11,7 +11,9 @@ import {
 	SearchInfoItem
 } from './style.js';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import  { actionCreators } from './store';
+import  { actionCreator as loginActionCreator } from '../../pages/login/store';
 import { Link } from 'react-router-dom';
 
 class Header extends Component{
@@ -21,7 +23,7 @@ class Header extends Component{
 	}
 
 	render(){
-		const { focused,handlerInputFocus,handlerInputBlur,mouseIn,list } = this.props;
+		const { focused,handlerInputFocus,handlerInputBlur,mouseIn,list,login,logout } = this.props;
 		return (
 			<Fragment>
 				<HeaderWrapper>
@@ -33,7 +35,11 @@ class Header extends Component{
 							<NavItem className="left active"><span className="iconfont">&#xe62f;</span> 首页</NavItem>
 						</Link>
 						<NavItem className="left"><span className="iconfont">&#xe600;</span> 下载APP</NavItem>
-						<NavItem className="right">登录</NavItem>
+						{
+							login ? 
+							<NavItem className="right" onClick={logout}>退出</NavItem> : 
+							<Link to='/login'><NavItem className="right">登录</NavItem></Link>
+						}
 						<NavItem className="right"><span className="iconfont">&#xe655;</span></NavItem>
 						<SearchWrapper>
 							<CSSTransition 
@@ -53,7 +59,9 @@ class Header extends Component{
 						</SearchWrapper>
 					</Nav>
 					<Addition>
-						<Btn className="write"><span className="iconfont">&#xe602;</span> 写文章</Btn>
+						<Link to="/write">
+							<Btn className="write"><span className="iconfont">&#xe602;</span> 写文章</Btn>
+						</Link>
 						<Btn>注册</Btn>
 					</Addition>
 				</HeaderWrapper>
@@ -111,7 +119,8 @@ const mapStateToProps = (state)=>{
 		page: state.getIn(['header','page']),
 		mouseIn: state.getIn(['header','mouseIn']),
 		totalPage: state.getIn(['header','totalPage']),
-		refresh: state.getIn(['header','refresh'])
+		refresh: state.getIn(['header','refresh']),
+		login: state.getIn(['login','login'])
 	}
 }
 
@@ -138,6 +147,17 @@ const mapDispatchToProps = (dispatch)=>{
 				dispatch(actionCreators.changPage(1));
 			}
 			setTimeout(()=>{dispatch(actionCreators.updateRefresh())},500);
+		},
+		logout(){
+			dispatch(loginActionCreator.logout());
+		},
+		checkStatus(login){
+			if(!login){
+				return <Redirect to="/login" />
+			}
+			else{
+				console.log("ok");
+			}
 		}
 	}
 }

@@ -6,7 +6,10 @@ import store from './store/index.js';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './pages/home';
+import Login from './pages/login';
 import Detail from './pages/detail';
+import Write from './pages/Write';
+import './App.css';
 
 class App extends Component {
   render(){
@@ -18,7 +21,9 @@ class App extends Component {
           <BrowserRouter>
             <Header />
             <Route path='/'  exact component={Home}></Route>
-            <Route path='/detail' exact component={Detail}></Route>
+             <Route path='/write'  exact component={Write}></Route>
+            <Route path='/login'  exact component={Login}></Route>
+            <Route path='/detail/:id?' exact component={Detail}></Route>
           </BrowserRouter>
 	    </Provider>
       </Fragment>

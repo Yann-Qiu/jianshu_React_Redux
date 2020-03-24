@@ -9,9 +9,9 @@ const setDetail=(data)=>{
 	}
 }
 
-export const getDetail = () =>{
+export const getDetail = (id) =>{
 	return ((dispatch)=>{
-		axios.get('/api/detail.json')
+		axios.get('/api/detail.json?id='+id)
 		.then((res)=>{
 			const data = res.data;
 			if(data.success){
