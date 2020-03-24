@@ -1,0 +1,15 @@
+{
+	"success": true,
+	"data":[{
+		"title":"Title",
+		"writer":{
+			"imgUrl":"https://upload.jianshu.io/users/upload_avatars/10934411/2b95aa67-88ea-4ad1-b069-5f784b074086.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp",
+			"name":"WriterName",
+			"diamond": 23.9,
+			"time":"2020.02.08 14:17:12",
+			"word":"450",
+			"read":"62,495"
+		},
+		"content":"Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text "
+	}] 
+}

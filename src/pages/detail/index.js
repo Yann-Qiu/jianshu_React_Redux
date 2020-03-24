@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Page,Button,DetailWrapper,DetailTitle,DetailText,DetailWriter } from './style.js';
+import { Page,Button,DetailWrapper,DetailTitle,DetailText,DetailWriter,DetailSide } from './style.js';
+import { connect } from 'react-redux';
+import { actionCreator } from "./store";
 
 class Detail extends Component{
 	
 	render(){
+		const { detailList } = this.props;
 		return (
 			<Page>
 				<Button>
@@ -16,47 +19,67 @@ class Detail extends Component{
 					</div>
 					<div className="word">赞赏</div>
 				</Button>
-				<DetailWrapper>
-					<DetailTitle>
-						Title
-					</DetailTitle>
-					<DetailWriter>
-						<img 
-							className="pic" 
-							src="https://upload.jianshu.io/users/upload_avatars/10934411/2b95aa67-88ea-4ad1-b069-5f784b074086.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp" 
-							alt="img"
-						/>
-						<div className="detailInfo">
-							<div className="name">Name</div>
-							<div className="desc">
-								<span className="descItem diamond">
-									<span className="iconfont">&#xe625;</span>
-									1
-								</span>
-								<span className="descItem">
-									2020.02.08 14:17:12
-								</span>
-								<span className="descItem">
-									字数 450
-								</span>
-								<span className="descItem">
-									阅读 62,495
-								</span>
-							</div>
-						</div>
-					</DetailWriter>
-					<DetailText>
-						TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
-						TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
-						TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
-						TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
-						TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
-					</DetailText>
-				</DetailWrapper>
+				{detailList.map((item,index)=>{
+					return (
+							<DetailWrapper key={index}>
+								<DetailTitle>
+									{item.get("title")} 
+								</DetailTitle>
+								<DetailWriter>
+									<img 
+										className="pic" 
+										src={item.getIn(["writer","imgUrl"])} 
+										alt="img"
+									/>
+									<div className="detailInfo">
+										<div className="name">{item.getIn(["writer","name"])} </div>
+										<div className="desc">
+											<span className="descItem diamond">
+												<span className="iconfont">&#xe625;</span>
+												{item.getIn(["writer","diamond"])} 
+											</span>
+											<span className="descItem">
+												{item.getIn(["writer","time"])} 
+											</span>
+											<span className="descItem">
+												字数 {item.getIn(["writer","word"])} 
+											</span>
+											<span className="descItem">
+												阅读 {item.getIn(["writer","read"])} 
+											</span>
+										</div>
+									</div>
+								</DetailWriter>
+								<DetailText>
+									{item.get("content")} 
+								</DetailText>
+							</DetailWrapper>
+						)
+				})}
+				<DetailSide>
+					DetailSide
+				</DetailSide>
 			</Page>
 		)
 	}
-	
+
+	componentDidMount(){
+		this.props.getDetail();
+	}
 }
 
-export default Detail;
+const mapStateToProps = (state)=>{
+	return{
+		detailList: state.getIn(["detail","detailList"])
+	}
+}
+	
+const mapDispatchToProps = (dispatch)=>{
+	return{
+		getDetail(){
+			dispatch(actionCreator.getDetail());
+		},
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Detail);

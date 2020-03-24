@@ -29,7 +29,9 @@ class Header extends Component{
 						<Logo />
 					</Link>
 					<Nav>
-						<NavItem className="left active"><span className="iconfont">&#xe62f;</span> 首页</NavItem>
+						<Link to='/'>
+							<NavItem className="left active"><span className="iconfont">&#xe62f;</span> 首页</NavItem>
+						</Link>
 						<NavItem className="left"><span className="iconfont">&#xe600;</span> 下载APP</NavItem>
 						<NavItem className="right">登录</NavItem>
 						<NavItem className="right"><span className="iconfont">&#xe655;</span></NavItem>

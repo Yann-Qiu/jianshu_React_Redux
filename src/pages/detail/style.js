@@ -5,7 +5,8 @@ export const Page = styled.div`
 	background-color: #f9f9f9;
 	width : 100%;
 	min-height: 960px;
-	padding-top: 10px;
+	padding-top: 70px;
+	box-sizing: border-box;
 `
 
 export const Button = styled.div`
@@ -51,11 +52,14 @@ export const Button = styled.div`
 `
 
 export const DetailWrapper = styled.div`
+	float:left;
 	padding: 24px;
-	width : 960px;
-	margin: 0 auto;
+	width : 682px;
+	margin-left:250px;
+	margin-right: 15px;
 	background-color: #fff;
 	min-height: 800px;
+	box-sizing: border-box;
 `
 
 export const DetailTitle = styled.div`
@@ -73,6 +77,8 @@ export const DetailText = styled.div`
 	font-weight: 400;
     line-height: 40px;
     font-size: 16px;
+    box-sizing: border-box;
+    padding :3px;
 `
 
 export const DetailWriter = styled.div`
@@ -117,6 +123,14 @@ export const DetailWriter = styled.div`
     		}
     	}
     }
+`
+
+export const DetailSide = styled.div`
+	float: left;
+	width:228px;
+	min-height: 300px;
+	padding :18px; 
+	background:#fff;
 `
 
 
