@@ -32,7 +32,6 @@ export const Nav = styled.div`
 `;
 
 export const NavItem = styled.div`
-
 	line-height : 56px;
 	font-size : 17px;
 	padding : 0 15px;

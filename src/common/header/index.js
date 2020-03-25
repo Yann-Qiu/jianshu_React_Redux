@@ -14,59 +14,109 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import  { actionCreators } from './store';
 import  { actionCreator as loginActionCreator } from '../../pages/login/store';
+import  { actionCreator as detailActionCreator } from '../../pages/detail/store';
 import { Link } from 'react-router-dom';
 
 class Header extends Component{
 	constructor(props){
 		super(props);
 		this.getSearchInfo = this.getSearchInfo.bind(this);
+		this.checkStatus = this.checkStatus.bind(this);
 	}
 
 	render(){
-		const { focused,handlerInputFocus,handlerInputBlur,mouseIn,list,login,logout } = this.props;
-		return (
-			<Fragment>
-				<HeaderWrapper>
-					<Link to='/'>
-						<Logo />
-					</Link>
-					<Nav>
+		return this.checkStatus();
+	}
+	
+	bindEvents(){
+		window.addEventListener("scroll", this.props.changeShowScroll);
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener("scroll", this.props.changeShowScroll);
+	}
+
+	componentDidMount(){
+		this.bindEvents();
+	}
+
+	checkStatus(){
+		const { 
+			focused,
+			handlerInputFocus,
+			handlerInputBlur,
+			mouseIn,
+			list,
+			login,
+			logout,
+			isDetailPage,
+			detailList,
+			changeHeader
+		} = this.props;
+		if(isDetailPage && changeHeader)
+		{
+			return (
+				<Fragment>
+					<HeaderWrapper>
+					{
+						detailList.map((item)=>{
+							return (
+								<Nav>
+									<NavItem className="left">{item.get("title")}</NavItem>
+									<NavItem className="left">{item.getIn(["writer","name"])}</NavItem>
+								</Nav>
+							)
+						})
+					}
+					</HeaderWrapper>
+				</Fragment>
+			)
+		}
+		else{
+			return(
+				<Fragment>
+					<HeaderWrapper>
 						<Link to='/'>
-							<NavItem className="left active"><span className="iconfont">&#xe62f;</span> 首页</NavItem>
+							<Logo />
 						</Link>
-						<NavItem className="left"><span className="iconfont">&#xe600;</span> 下载APP</NavItem>
-						{
-							login ? 
-							<NavItem className="right" onClick={logout}>退出</NavItem> : 
-							<Link to='/login'><NavItem className="right">登录</NavItem></Link>
-						}
-						<NavItem className="right"><span className="iconfont">&#xe655;</span></NavItem>
-						<SearchWrapper>
-							<CSSTransition 
-								timeout={200} 
-								in={focused} 
-								classNames="slide"
-							>
-								<NavSearch 
-									className={ (focused||mouseIn) ? 'focused' : ''} 
-									onFocus={()=>{handlerInputFocus(list)}}
-									onBlur={handlerInputBlur}
+						<Nav>
+							<Link to='/'>
+								<NavItem className="left active"><span className="iconfont">&#xe62f;</span> 首页</NavItem>
+							</Link>
+							<NavItem className="left"><span className="iconfont">&#xe600;</span> 下载APP</NavItem>
+							{
+								login ? 
+								<NavItem className="right" onClick={logout}>退出</NavItem> : 
+								<Link to='/login'><NavItem className="right">登录</NavItem></Link>
+							}
+							<NavItem className="right"><span className="iconfont">&#xe655;</span></NavItem>
+							<SearchWrapper>
+								<CSSTransition 
+									timeout={200} 
+									in={focused} 
+									classNames="slide"
 								>
-								</NavSearch>
-							</CSSTransition>
-							<span className={(focused||mouseIn) ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe601;</span>
-							{this.getSearchInfo()}
-						</SearchWrapper>
-					</Nav>
-					<Addition>
-						<Link to="/write">
-							<Btn className="write"><span className="iconfont">&#xe602;</span> 写文章</Btn>
-						</Link>
-						<Btn>注册</Btn>
-					</Addition>
-				</HeaderWrapper>
-			</Fragment>
-		)
+									<NavSearch 
+										className={ (focused||mouseIn) ? 'focused' : ''} 
+										onFocus={()=>{handlerInputFocus(list)}}
+										onBlur={handlerInputBlur}
+									>
+									</NavSearch>
+								</CSSTransition>
+								<span className={(focused||mouseIn) ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe601;</span>
+								{this.getSearchInfo()}
+							</SearchWrapper>
+						</Nav>
+						<Addition>
+							<Link to="/write">
+								<Btn className="write"><span className="iconfont">&#xe602;</span> 写文章</Btn>
+							</Link>
+							<Btn>注册</Btn>
+						</Addition>
+					</HeaderWrapper>
+				</Fragment>
+			)
+		}
 	}
 
 	getSearchInfo(){
@@ -120,7 +170,10 @@ const mapStateToProps = (state)=>{
 		mouseIn: state.getIn(['header','mouseIn']),
 		totalPage: state.getIn(['header','totalPage']),
 		refresh: state.getIn(['header','refresh']),
-		login: state.getIn(['login','login'])
+		login: state.getIn(['login','login']),
+		isDetailPage: state.getIn(['detail','isDetailPage']),
+		detailList: state.getIn(['detail','detailList']),
+		changeHeader:state.getIn(['detail','changeHeader'])
 	}
 }
 
@@ -157,6 +210,13 @@ const mapDispatchToProps = (dispatch)=>{
 			}
 			else{
 				console.log("ok");
+			}
+		},
+		changeShowScroll(){
+			if(document.documentElement.scrollTop > 70)
+				dispatch(detailActionCreator.changeHeader(true))
+			else{
+				dispatch(detailActionCreator.changeHeader(false))
 			}
 		}
 	}

@@ -20,3 +20,17 @@ export const getDetail = (id) =>{
 		})
 	})
 }
+
+export const isPageDetail = (status) =>{
+	return{
+		type: actionType.IS_PAGE_DETAIL,
+		status:status
+	}
+}
+
+export const changeHeader = (status) =>{
+	return{
+		type: actionType.CHANGE_HEADER,
+		status:status
+	}
+}

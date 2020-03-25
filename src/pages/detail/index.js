@@ -66,6 +66,11 @@ class Detail extends PureComponent{
 
 	componentDidMount(){
 		this.props.getDetail(this.props.match.params.id);
+		this.props.isPageDetail(true);
+	}
+
+	componentWillUnmount(){
+		this.props.isPageDetail(false);
 	}
 }
 
@@ -80,6 +85,9 @@ const mapDispatchToProps = (dispatch)=>{
 		getDetail(id){
 			dispatch(actionCreator.getDetail(id));
 		},
+		isPageDetail(status){
+			dispatch(actionCreator.isPageDetail(status));
+		}
 	}
 }
 
