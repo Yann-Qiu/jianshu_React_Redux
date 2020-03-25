@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Page,Button,DetailWrapper,DetailTitle,DetailText,DetailWriter,DetailSide } from './style.js';
 import { connect } from 'react-redux';
 import { actionCreator } from "./store";
+import { withRouter } from 'react-router-dom';
 
 class Detail extends PureComponent{
 	
@@ -91,4 +92,4 @@ const mapDispatchToProps = (dispatch)=>{
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Detail);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Detail));

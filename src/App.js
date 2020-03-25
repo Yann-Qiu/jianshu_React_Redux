@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Login from './pages/login';
-import Detail from './pages/detail';
+import Detail from './pages/detail/loadable.js';
 import Write from './pages/Write';
 import './App.css';
 
