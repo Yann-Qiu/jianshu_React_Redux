@@ -1,3 +1,8 @@
+La website Jianshu est un website chinois qui n'a pas utilisé le framework pour développer. Dans ce projet, je la réalise en utlitisant le framework Reactjs et Redux.
+
+Lien: http://jianshuwithreact.s3-website.eu-west-3.amazonaws.com/
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
